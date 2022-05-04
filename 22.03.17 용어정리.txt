@@ -1,0 +1,75 @@
+2022.03.17
+comunication 통신 = request 요청과 response 응답으로 이루어진다.
+
+HTTP(Hyper Text Transfer protocol: 웹상에서 클라이언트간에 용청/응답으로 데이터를 주고받는 행위
+-클라이언트가  HTTP 포로토콜을 사용해 서로 통신을 주고 받으며 서버에세 요청을 보내면 서버는 응답을 클라이언트에게 보낸다.
+
+WEB: World Wide Web의 줄임말이며 www라고도 한다.
+
+Wen Application: 웹에서 실행되는 응용프로그램
+-사용자가 요청을 하면 서버에서는 요청을 분석하며 적절한 비즈니스를 수행하고 사용자에게 결과를 응답한다.
+-서버에서는 항상 클라이언트에게 응답할 준비를 하고있다.
+
+RDMBS: 관계형데이터베이스
+-기본 구성이 table로 되어있으며 각 table은 Key와 Value쌍으로 데이터를 표현.
+-데이터간의 종속성을 Relation Ship으로 표현하며, 데이터의 완전한 무결성이 보장되어야 하는 곳에서 주로사용.
+-지정된 값을 엑셀 등보다 훨씬 빠르게 값을 처리해서 찾을 수있다.
+
+데이터: 일상생활에서 쌓여가는 더미들
+정보처리: 데이터를 모두 정리해서 정보로 만들어 주는것
+정보: 데이터가 쓸모 있게 처리되어 바뀌어진것
+데이터-> 정보처리 -> 정보
+빅데이터: 데이터 더미가 많이 쌓여서 만들어진 거대한 데이터 더미
+
+ICBMS(IoT(사물인터넷),Cloud(클라우드),Big data(빅데이터),Mobile(모바일),Security(보안)): 4차 산업
+
+NoSQL: 빅데이터를 저장하기위한 장치?
+
+깃 배쉬에 지정된 폴더를 업로드하기 위한 준비
+git config --global user.name GOGOYS  (로그인 준비)
+git config --global user.email qaz75391@naver.com (로그인준비)
+rm -rf .git (이거는 만들어논 깃 폴더를 삭제하는 명령어)
+git init  (깃 저장소 설정, 신청)
+git add README.md
+git commit -m first
+git remote add origin https://(깃허브 주소)
+git push -u origin master
+
+
+2022.03.18
+
+
+윈도우 cmd: 윈도우에서 마우스를 사용하지 않고 키보드로 명령을 입력하여 어떤기능을 수행할때 사용하는 도구
+
+Linux Command Shall: LInux 운영체제에서 키보드로 명령을 입력하여 어떤 기능을 수행할때 사용하는 명령 입력 창(window)
+
+Git Bash: git-hub와 프로젝트를 연동할때 사용하는 작은 command 도구, Linux 명령체계와 유사하며, 윈도우에서 Linux 기본 명령을 연습할 수 있다. = Linux Bone Shall
+
+Git Bash를 실행시켜 나오는 $표시: Prompt: 명령을 내리면(명령 입력후, 엔터) 명령을 수행할 준비가 되었다 라는 표식
+
+	clear: 현재 화면의 메시지를 지우는 명령어
+	git init: git local  저장소 설정(초기화, 신청)
+	git remote add origin https://github.com/GOGOYS/hello-view.git
+	컴퓨텨야 origin 이라는 명령어를 쓰면 https://github.com/GOGOYS/hello-view.git이라는 폴더를 자동으로 사용해라 라고 지정하는 명령어
+	git add . 지정된 폴더 안에 있는 모든 파일, 폴더를 압축하여 .git 폴더에 저장해달라
+	git commit -m first 처음으로 커밋을 올린다.
+	rm -rf .git  내가 올린 repository를 삭제해라(다시 되돌릴수 없으니 매우 위험)
+
+	후에 계속해서 깃허브에 데이터를 올릴때는  add commit push만 하면 된다.
+	add commit push만 깃허브에 해놓으면 코드 기록이 되어있어서 올린순서대로 버전을 찾을 수 있다.(복구 가능)
+	= version controll
+
+	쉬프트+인서트 깃 배쉬에서 붙여넣기
+
+	git clone 리파지토리 주소 : 다른 환경에서 리파지토리에 있는 내용이 한번도 없을 때 다운받을 수 있다.
+	git pull : 리파지토리에 있는 데이터들을 업데이트해서 가져온다.
+
+	추가 수정 삭제시 git add . git commit -m "내용" git push
+	시작할때 git pull
+
+	github 업로드 예외 설정하기
+	touch .gitignore 을 입력한 후, gitignore파일을 오픈하여 예외파일 입력
+
+
+
+	

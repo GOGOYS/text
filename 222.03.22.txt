@@ -1,0 +1,6 @@
+통합 개발 환경
+Intergrated Development Envieonment
+
+변수(Varriable)
+연산을 수행할 데이터를 저장할 기억장소
+연산을 수행할 데이터를 기억장소에 저장할때, 개발자가 직접 위치를 지정함	
