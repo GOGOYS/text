@@ -1,0 +1,228 @@
+## spring 처음 시작할때
+
+pom.xml에서
+<java-version>11</java-version>
+		<org.springframework-version>5.2.21.RELEASE</org.springframework-version>
+
+으로 자바 버전 11로 스프링버전 5.2.21로 바꾸기
+
+     <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+
+메이븐 플러그인에서 
+  <source>${java-version}</source>
+                    <target>${java-version}</target>
+
+${java-version}설정하기
+
+메이븐에서 slf4j 최신버전 릴리즈
+
+
+
+
+
+## -rootPath 설정
+
+preferences - Web - JSP Files - Editor - Templates - html5 선택
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<c:set value="${pageContext.request.contextPath}" var="rootPath" />
+넣기 
+
+앞에 $를 하나 더 붙여야 문자열로 인식한다.
+$${pageContext.request.contextPath}
+
+
+
+
+## 파일 왼쪽 클릭했을때 뜨게 하는거 설정
+perspective - customise perspective - file - new 선택
+
+
+
+
+
+## <!--  DBMS 연동 프로젝트 -->
+		<!-- spring jdbc -->
+		<!--  스프링 프로젝트에서 DBMS와 연결하는 첫번째 파이프-->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.3.20</version>
+</dependency>
+
+
+메이븐 Apache Commons DBCP
+		<!-- common-dbcp2 -->
+		<!-- db connection pool을 만들고 db와의 연결을 원활히 도와주는 도구 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-dbcp2</artifactId>
+    <version>2.9.0</version>
+</dependency>
+
+
+		<!-- mybatis -->
+		<!-- mybatis-spring -->
+		<!-- db와 연결할때 SQL을 변환하여 DB로 보내는 데이터로 자동 변환 -->
+		<!-- Dao 클래스를 자동으로 생성해주는 도구 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.10</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+
+		<!-- ojdbc -->
+		<!-- oracle과 연결할때 Project에서 DBMS로 연결하는 도구 -->
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>18.15.0.0</version>
+		</dependency>
+
+
+## appServlet 에서 mybatis-context
+finish 누르지 말고 next 눌러서 선택
+-beans   -context -mybatis-spring  -tx 선택하고 제일 마지막꺼 다 선택 후 finish
+
+
+
+## mybatis-context.xml 안에 설정
+<!-- mybatis 3.x의 장점-->
+	<!-- 
+		context 설정만 잘 해 두면 DBMS 연결하여 사용하는데
+		작성하는 코드가 매우 간소해진다.
+		-->	
+		
+	<!-- dataSource -->
+	<!-- DBMS를 연결하는데 필요한 기본정보 설정-->
+	<!--  BasicDataSource ds = new BasicDataSource()와 같은말-->
+	<!-- property : setter method -->
+	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1520:xe"/>
+		<property name="username" value="user3"/>
+		<property name="password" value="12341234"/>
+
+	</bean>
+	<!-- SqlSessionFactory -->
+	<!-- Dao, Mapper 등을 사용하여 DB 연결하는 bean 생산기지 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>	
+		<property name="typeAliasesPackage" value="com.callor.school.model"/>	
+	</bean>
+	<!-- SqlSessionTemplate -->
+	<!-- SqlSessionFatory를 도와주는 도구 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>	
+	</bean>
+	
+	<!--  
+		Dao interface 가 저장된 package를 scan 하여
+		SqlSessionFatory에게 알려주는 역할 수행
+	-->
+	<mybatis-spring:scan base-package="com.callor.school.pesistance"/>
+
+
+
+
+## web.xml 안에 수정
+
+<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value> 을 아래처럼 수정
+
+appServlet/*-context.xml(안에 있는 context 파일을 모두 읽어라.)
+<param-value>/WEB-INF/spring/appServlet/*-context.xml</param-value>
+
+
+
+
+
+## spring 폴더 아래 mapper 폴더를 만든 후student-mapper.xml 생성
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<!--  
+	*mapper.xml 파일
+	sql문을 xml 문 받식으로 작성하는 파일
+	
+	SQL문을 dao 클래스에 문자열로 작성을 하는데 이 방식을 mybatis 3.5x 이상에서만 사용할 수 있다.
+	또한 문자열로 작성하는 SQL 문은 상대적으로 유락 발생할 확률이 높다.
+	다양한 SQL문을 구현하기가 다소 불편하다
+	
+	xml 방식으로 SQL을 작성하는 것은
+	전통적으로 mybatis에서 많이 사용하고 다양한 SQL 구현이 유리하다
+	
+	mybatis Dao interface와 mapper.xml 파일을 조합하여 내부에서 실제 클래스를 구현한다.
+ -->
+ <mapper namespace="com.callor.school.pesistance.StudentrDao">
+ 
+ 	<select id="selectAll">
+ 		SELECT * FROM tbl_student
+ 	</select>
+ 	
+ 	<select id="findById">
+ 		SELECT * FROM tbl_student WHERE st_num = #{st_num}
+ 	</select>
+ 
+ 	<insert id="insert">
+ 			INSERT INTO tbl_student
+ 			(
+ 				st_num,
+ 				st_name,
+ 				st_grade,
+ 				st_addr,
+ 				st_tel
+ 			)VALUES(
+ 				#{st_num},
+ 				#{st_name},
+ 				#{st_grade},
+ 				#{st_addr},
+ 				#{st_tel}
+ 				)
+ 	</insert>
+ 	
+ 	<update id="update">
+ 		UPDATE tbl_student SET
+ 				st_name =#{st_name},
+ 				st_grade = #{st_grade},
+ 				st_addr = #{st_addr},
+ 				st_tel = #{st_tel}
+ 				
+ 		WHERE st_num = #{st_num}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROm tbl_student WHERE st_num = #{st_num}
+ 	</delete>
+ </mapper>
+ ```
+## StudentDao 생성
+
+
+
+## favicon icon 설정
+* static 폴더에 images 폴더 생성후 다운받은 파피콘 넣고
+* servlet-context.xml에 아래 넣기
+<resources mapping="/favicon.ico/**" location="/static/images/favicon.ico" />
+* 위에만 해도 안되면 home.jsp head 부분에 아래 넣기
+<link rel="icon" href="${rootPath}/static/images/favicon.ico" type="image/x-icon"/>

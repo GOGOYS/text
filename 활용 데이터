@@ -1,17 +1,19 @@
 활용 데이터
 
 관광공사 오픈 API
-카카오맵 API 라이브러리 사
+카카오맵 API 라이브러리 사용
+
+공공데이터 포털
+
 광주광역시 관광지 목록 -https://www.data.go.kr/data/15098165/openapi.do
 광주광역시 축제 목록   -https://www.data.go.kr/data/15098170/openapi.do
- 광주광역시 박물관 / 미술관 목록 -https://www.data.go.kr/data/15098166/openapi.do
-광주광역시 도시철도공사_지하철역별 맵데이터 -https://www.data.go.kr/data/15095277/fileData.do
+광주광역시 박물관 / 미술관 목록 -https://www.data.go.kr/data/15098166/openapi.do
 광주광역시 지역특화거리 -https://www.data.go.kr/data/15098169/openapi.do
 광주광역시 향토문화유적지 -https://www.data.go.kr/data/15098172/openapi.do
-광주광역시도시철도공사 공연행 -https://www.data.go.kr/data/3046436/openapi.do 
+광주광역시 광주맛집 -https://www.data.go.kr/data/3082925/fileData.do
+
 
 광주광역시 한옥체험업 현황 -https://www.data.go.kr/data/15053900/fileData.do
-광주광역시 광주맛집 -https://www.data.go.kr/data/3082925/fileData.do
 광주광역시 공예품(관광기념품)판매장 운영현황 -https://www.data.go.kr/data/15056083/fileData.do
 광주광역시_공연장 현황  -https://www.data.go.kr/data/3036284/fileData.do
 광주광역시_모범음식점 현황 -https://www.data.go.kr/data/3077702/fileData.do
@@ -21,3 +23,89 @@
 광주광역시 동구 문화재정보 -https://www.data.go.kr/data/15010915/fileData.do
 광주광역시_전통시장 점포 현황 -https://www.data.go.kr/data/15095853/fileData.do
 광주광역시_문화예술회관 공연정보 -https://www.data.go.kr/data/3036271/fileData.do
+
+
+광주광역시도시철도공사 공연행사 -https://www.data.go.kr/data/3046436/openapi.do 
+광주광역시 도시철도공사_지하철역별 맵데이터 -https://www.data.go.kr/data/15095277/fileData.do
+광주광역시도시철도공사_테마역사운영현황 -https://www.data.go.kr/data/15046049/fileData.do
+
+
+문화 공공데이터광장
+관광지 정보 -https://www.culture.go.kr/data/openapi/openapiView.do?id=319&keyword=%EA%B4%91%EC%A3%BC&searchField=all&gubun=A
+지도로 보는 문화재 탐방 -https://www.culture.go.kr/data/openapi/openapiView.do?id=378&keyword=%EA%B4%91%EC%A3%BC&searchField=all&gubun=A
+
+
+
+
+요구사항 명세
+
+
+
+서비스              필요기능                    상세설명
+
+메인                지하철역 노선 선택           노선 선택시 역 주변 관광지에 대한 정보 리스트 노출       
+                    관광지 리스트 선택          관광지 클릭시 상세페이지로 이동
+
+
+광주소개            오랑께란?                    우리홈페이지에 대한 아이텐티티 어필
+                    광주소개                     광주소개(역사,8경5미,홍보 등) 상세페이지 링크 연결
+                    광주 홍보                   광주 홍보 영상 링크 연결
+                    광주의 지하철          광주 지하철 /운임/문화여행/편의시설/ 에티켓 등 과련 정보 상세페이지 제공
+
+
+관광지 안내          구별 여행                 광주의 구별 관광지 정보 리스트 노출, 클릭시 상세정보 열람
+                    테마별 여행                광주의 테마별 여행 정보 리스트 노출, 클릭시 상세페이지로 이동
+                    축제 -전시                광주의 축제, 전시 리스트 노출, 클릭시 상세페이지로 이동 
+
+
+코스담기            역별 추천 관광지 노출          역 주변의 추천관광지가 지도위에서 노출되어 클릭시 상세정보 열람
+                    관광지 추가/삭제               관광지 선택시 해당 관광지 사용자의 코스리스트에 추가/삭제
+                    코스 리스트 저장               사용자가 추가한 코스리스트 저장
+                    코스 리스트 노출             만들어진 코스리스트 최신순대로 노출 후, 클릭시 상세정보 열람
+
+
+
+
+여태했던거
+이혜지 - 요구사항 분석 및 자료조사 ,컨셉 기획 및 설계, 관광 상세페이지 기능구현, 기획 발표, 로고제작
+
+나하나 - 기획 및 자료조사, 지역별 인기 관광지 페이지 기능구현, 지도 일러스트 제작,
+
+이진우 - homepage 동적 기능구현, 컨셉 기획 수립, 통합 테스터, 페이지 구성 총괄
+
+고영승 - UI Layout 디자인 설계 및 제작, 주변관광지 페이지 기능구현, 경기리그 페이지 기능구현, 총괄팀장, 전체 페이지 통합 디버깅
+
+
+
+이제 할거
+
+이혜지 - API 설계 / 데이터베이스 설계 / API 연결 / 서버 구축
+
+나하나 - API 연결 / 데이터베이스 구축 / 데이터베이스 연결 / 서버 구축
+
+이진우 - HTML -> Spring 연동 / 데이터베이스 구축 / 데이터베이스 연결 / 서버 구축 / UI 유지보수
+
+고영승 - HTML -> Spring 연동 / API 설계 / 데이터베이스 설계 / 서버 구축
+
+
+
+HTML -> Spring 연동
+
+( ~ 17)
+
+API 설계 / 데이터베이스 설계 / API 연결 / 데이터베이스 구축 / 데이터베이스 연결 / 서버 구축
+
+
+
+
+공공 API에서 경기장과 관광지 좌표값을 받아온 뒤 카카오 API에 연결하여 경기장 주변 2km이내 관광지 위치 제공
+
+
+공공 데이터를 활용하여 숙박과,식당 관광지의 정보를 받아 온 우 정보 제공
+
+
+
+
+
+
+
