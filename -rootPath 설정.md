@@ -217,6 +217,7 @@ appServlet/*-context.xml(안에 있는 context 파일을 모두 읽어라.)
  </mapper>
  ```
 ## StudentDao 생성
+* mapper랑 Dao랑 알아서 지지고 볶아서 sql언어로 짜잔 하고 연동해준다.
 
 
 
@@ -226,3 +227,41 @@ appServlet/*-context.xml(안에 있는 context 파일을 모두 읽어라.)
 <resources mapping="/favicon.ico/**" location="/static/images/favicon.ico" />
 * 위에만 해도 안되면 home.jsp head 부분에 아래 넣기
 <link rel="icon" href="${rootPath}/static/images/favicon.ico" type="image/x-icon"/>
+
+
+## 한글 엔코딩
+* web.xml에 넣기
+<filter>
+		<filter-name>encKor</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encKor</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+
+
+## jackson databine
+* pom.xml 안에 넣기
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.1</version>
+		</dependency>
+
+
+
+##  @ResponseBody
+* Controller method에서 무자열을 return하면
+* 문자열을 web clint에게 그래도 전송하는 역할을 하도록 지시하는 Annotation이다
