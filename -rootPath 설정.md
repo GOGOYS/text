@@ -265,3 +265,33 @@ appServlet/*-context.xml(안에 있는 context 파일을 모두 읽어라.)
 ##  @ResponseBody
 * Controller method에서 무자열을 return하면
 * 문자열을 web clint에게 그래도 전송하는 역할을 하도록 지시하는 Annotation이다
+
+
+## Spring sequrity 
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.3.13.RELEASE</version>
+		</dependency>
+
+* 회원가입을 하면 password를 데이터베이스에 문자열 그대로 저장을 한다
+* 그래서 해킹을 당하면 비밀번호 노출의 위험이 있어서 
+* Maven Dependensies - sequrity.crypto.bcrypto를 사용하여 암호화를 할것이다.
+
+* 회원가입을 했을때 비밀번호를 암호화를 시키고 DB에 저장,
+* DB에서 꺼내올때 다시 복호화를 한 후 가져오기
+
+* 방법1. = 쌍방향 암호화: 평문+key를 붙여 암호화를 시킨후 다시 +key를 제거해 원문으로 복호화
+* 방법2. = 단방향 암호화: 평문+key를 붙여 암호화를 시킨후 DB저장, 
+* 로그인 할때 암호를 입력하면 암호화를 시켜 DB에 저장된 내용과 비교 (안전성이 더 높음)
+
+* 평문 문자를 BCrypt를 사용하여 암호화를 할때 key 값에 따라 60자리의 문자열로 바뀐다.
+
+# security-context.xml
+
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg index="0" value="4"/>
+	</bean>
+* <constructor-arg index="0" value="4"/> 
+value 값은 암호화를 몇번 할것인가 커지켠 커질수록 강력한 암호, 대신 시간이 오래걸림
