@@ -295,3 +295,16 @@ appServlet/*-context.xml(안에 있는 context 파일을 모두 읽어라.)
 	</bean>
 * <constructor-arg index="0" value="4"/> 
 value 값은 암호화를 몇번 할것인가 커지켠 커질수록 강력한 암호, 대신 시간이 오래걸림
+
+
+
+# Jackson Dataformat XML
+
+```
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+    <version>2.13.3</version>
+</dependency>
+```
