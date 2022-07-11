@@ -300,6 +300,7 @@ value 값은 암호화를 몇번 할것인가 커지켠 커질수록 강력한 �
 
 # Jackson Dataformat XML
 
+
 ```
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 <dependency>
@@ -308,3 +309,5 @@ value 값은 암호화를 몇번 할것인가 커지켠 커질수록 강력한 �
     <version>2.13.3</version>
 </dependency>
 ```
+
+* jackson-dataformat-xml와 jackson-databind는 버전이 같아야함
