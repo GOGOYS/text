@@ -1,0 +1,67 @@
+<dependencyManagement>로 버전을 관리
+<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-bom</artifactId>
+				<version>5.3.13.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+</dependency>
+
+security을 사용하기 위한 도구들
+	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+pom.xml에 위의 도구를 추가하면
+
+Spring Bean Configuration File에서
+xmlns에 security 항목이 추가가 된다
+
+<!--  permitAll:그냥 통과시켜라   isAuthenticated(): 인증이 되었는지 확인해라-->
+	<!--  form-login: 만약 누군가 홈페이지를 요청했는데 로그인이 안되어있으면 
+		sec가 제공하는 로그인창을 띄워라-->
+		<!--{noop}: 패스워드를 암호화하지 말아라: 암호화하면 로그인이 안됨  -->
+<sec:http>
+		<sec:intercept-url pattern="/login" access="permitAll"/>
+		<sec:intercept-url pattern="/**" access="isAuthenticated()"/>
+		<sec:form-login/>
+		<sec:logout/>
+	</sec:http>
+	
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="GOGO" password="{noop}!Korea8080" authorities="ROLE_ADMIN"/>
+			</sec:user-service>
+		</sec:authentication-provider>	
+	</sec:authentication-manager>
+
+
+security를 통해서 작업을 하면
+<form:form action="${rootPath}/logout" method="POST">
+		<button>로그아웃</button>
+	</form:form>
+taglib form 을쓰면 자동으로  웹페이지 소스에서 자동으로 input이 생겨서 값이 담긴다
+<input type="hidden" name="_csrf" value="1487e8d0-9bdc-4bbf-b7dd-cc178875251f">이게 따라옴
+
+일반 form 태그를 쓰면 이렇게 작성해줘야 값을 담아서 전송 할 수 있다.
+<input name="${_csrf.parameterName}" value="${_csrf.token}">
+
+/login과 /logout은 security에서 제공하는 controller에서 처리해서 자동으로 해줌
