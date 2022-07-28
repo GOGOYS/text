@@ -551,3 +551,23 @@ Durability 영속성 : 성공한 트랜잭션의 결과는 시스템이 고장 �
 - 공유 로깅: 읽기만 허용하는 Lock
 - 베타로깅 : 읽기, 쓰기 모두 금지하는 Lock
 
+
+
+javaScript fetch 함수 비동기 방식으로 진행
+fetch("http://example.com/user/info")
+.then(response=>response.json())
+.then(result=>console.log(result))
+1. WebAPI인 fetch함수를 사용하여 example.com 서버에 user 정보(info)를 요청한다.
+2.Event loop에 의해 fetch함수 1번 response=>response.json() 함수와
+	2번 result=>console.log(result)함수의 코드가 call stack에 push된다.
+3.fetch 함수는 오류가 없으면 즉시 종료되고 call stack에서 제거된다.
+4.서버에서 응답이 오면 1번 함수가 실행되고 response 결과에서 
+	json데이터를 추출한 후 return한다. 1번 함수 코드도 call stack에서 제거된다.
+5.return된 결과를 2번 함수코드에서 console에 출력한 후 2번 함수도 call stack에서 제거된다.
+
+javaScript fetch 함수 동기 방식 실행
+const response = await fetch("http://example.com/user/info")
+const result = swait response.json()
+console.log(result)
+1.ES5 이상에서는 Promise를 사용하여 동기적으로 실행이 가능하다
+2.비동기 Call back을 사용하지 않고, async, await 조합으로 동기 실행이 가능하다
