@@ -571,3 +571,13 @@ const result = swait response.json()
 console.log(result)
 1.ES5 이상에서는 Promise를 사용하여 동기적으로 실행이 가능하다
 2.비동기 Call back을 사용하지 않고, async, await 조합으로 동기 실행이 가능하다
+
+
+비동기 실행과 메모리
+Heap
+-자바스크립트의 엔진은 Memory heap과 Call stack을 가지고 있다.
+-Memory heap에서는 객체나 변수들이 저장된다
+-Call stack에서는 코드가 실행되고 함수가 쌓인다.
+-Event loop+ Callback Queue(큐는 비동기 처리를 하는 부분이다
+-자바스크립트는 브라우저와 함께 돌아가기 때문에 
+web에서 제공하는 API들과 함께 실행된다.
