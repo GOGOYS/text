@@ -1,0 +1,69 @@
+톰캣 홈페이지 -> 톰캣9
+
+core : 32-bit/64-bit Windows Service Installer (pgp, sha512) 다운로드
+
+install => choose Component에서
+Service Startup,  Manager 체크 ->login에 username, password 설정
+
+install 종료후 'localhost:8080' -> Manager App 선택
+
+
+tomcat 홈페이지 -> maven plugin -> version 2.2
+
+pom.xml
+
+<plugin>
+		          <groupId>org.apache.tomcat.maven</groupId>
+		          <artifactId>tomcat7-maven-plugin</artifactId>
+		          <version>2.2</version>
+		          <configuration>
+		          	<url>http://localhost:8085/manager/text</url>
+		          	<server>tomcat</server>
+		          	<path>/GOGOYS</path>
+		          	<username>admin</username>
+		          	<password>!aa1234</password>
+		          	<uriencoding>UTF-8</uriencoding>
+		          	<charset>UTF-8</charset>
+		          </configuration>
+       		</plugin>
+
+<properties>에
+
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+추가
+
+
+C:\Program Files\Apache Software Foundation\Tomcat 9.0\conf => tomcat-users.xml파일
+ <role rolename="manager-script"/>
+  <role rolename="manager-gui"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="!aa1234"
+        roles="manager-script,manager-gui,manager-status"/>
+추가
+
+
+Run Configuration -> mavenBuild -> new configuration
+
+Base directory : 설정하고싶은 패키지 선택
+
+goals : 'tomcat:undeploy tomcat:deploy' 삭제하고 배포하기
+Apply , Run
+
+메뉴바 상단의 Run 선택
+Run History에서 확인
+
+히스토리에서 안보이면
+
+preference -> maven -> user setting
+
+local repositoy가 C:/jdk_3rd/repo면
+위의 open file(maven-setting.xml)을 열어서
+
+ <servers>
+      	<id>tomcat</id>
+      	<username>GOGOYS</username>
+      	<password>Gogoys1020!</password>
+ </servers>
+ 설정
